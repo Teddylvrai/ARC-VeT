@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>On te manque deja ?</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #441f1f, #1d2d11);
+    color: #fff;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+  }
+  .container {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2rem 3rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    width: 320px;
+    text-align: center;
+  }
+  h1 {
+    margin-bottom: 1rem;
+  }
+  input[type="password"] {
+    width: 100%;
+    padding: 0.65rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  button {
+    background-color: #6b5b95;
+    border: none;
+    padding: 0.65rem 1rem;
+    font-size: 1rem;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+  }
+  button:hover {
+    background-color: #563d7c;
+  }
+  .error {
+    color: #ff6b6b;
+    margin-top: 0.5rem;
+    font-weight: bold;
+  }
+  .hidden {
+    display: none;
+  }
+  /* Protected content style */
+  #protectedContent {
+    max-width: 600px;
+  }
+</style>
+</head>
+<body>
+<div class="container" id="loginContainer">
+  <h1>Tu es si Curieux ?</h1>
+  <input type="password" id="passwordInput" placeholder="Entrez le mot de passe" />
+  <button id="submitBtn">Valider ?</button>
+  <div class="error hidden" id="errorMsg">Mot de passe incorrect</div>
+</div>
+
+<div class="container hidden" id="protectedContent">
+  <h1>Tu es là ?</h1>
+  <p>
+  </p>
+</div>
+
+<script>
+  (function() {
+    const PASSWORD = "VeTisBack=-]"; // Changez ce mot de passe selon votre choix
+    const loginContainer = document.getElementById('loginContainer');
+    const protectedContent = document.getElementById('protectedContent');
+    const passwordInput = document.getElementById('passwordInput');
+    const submitBtn = document.getElementById('submitBtn');
+    const errorMsg = document.getElementById('errorMsg');
+
+    function checkPassword() {
+      if(passwordInput.value === PASSWORD) {
+        errorMsg.classList.add('hidden');
+        loginContainer.classList.add('hidden');
+        protectedContent.classList.remove('hidden');
+      } else {
+        errorMsg.classList.remove('hidden');
+        passwordInput.value = '';
+        passwordInput.focus();
+      }
+    }
+
+    submitBtn.addEventListener('click', checkPassword);
+    passwordInput.addEventListener('keypress', function(e) {
+      if(e.key === 'Enter') {
+        checkPassword();
+      }
+    });
+  })();
+</script>
+</body>
+</html>
